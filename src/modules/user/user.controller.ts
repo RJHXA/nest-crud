@@ -5,9 +5,11 @@ import {
     Controller,
     HttpCode,
     HttpStatus,
+    UseGuards,
 } from '@nestjs/common';
 
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 import { RegisterDto } from './dto/register.dto';
 import { UserService } from './user.service';
@@ -24,6 +26,8 @@ export class UserController {
     }
 
     @Get()
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @ApiResponse({ status: 200, description: 'List of users' })
     async getAllUsers() {
         return this.userService.getAllUsers();
