@@ -8,15 +8,15 @@ import {
 } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto.ts';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService)
+    constructor(private authService: AuthService) {}
 
-    @HttpCode(HttpStatus.OK)
-    @Post('login')
-    async login(@Body() {email, password}: LoginDto) {
-        return await this.authService.login(email, password);
-    }
+    // @HttpCode(HttpStatus.OK)
+    // @Post('login')
+    // async login(@Body() {email, password}: LoginDto) {
+    //     return await this.authService.login(email, password);
+    // }
 }
