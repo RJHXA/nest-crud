@@ -13,10 +13,11 @@ export class UserService {
           throw new UnauthorizedException('Email already in use');
         }
     
+        const hashedPassword = await bcrypt.hash(password, 10);
         return this.userRepository.create({
           name,
           email,
-          password,
+          password: hashedPassword,
         });
     }
 
